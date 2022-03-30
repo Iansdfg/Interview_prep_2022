@@ -1,0 +1,23 @@
+class Solution:
+    """
+    @param original_string: a string
+    @return: a compressed string
+    """
+    def compress(self, original_string):
+        # write your code here
+        if not original_string:
+            return ''
+
+        res = ''
+        slow, fast = 0, 0
+        while fast < len(original_string):
+            if original_string[fast] == original_string[slow]:
+                fast += 1 
+            else:
+                cnt = fast - slow 
+                res += original_string[slow] + str(cnt)
+                slow = fast
+
+        res += original_string[slow] + str(fast - slow )
+
+        return res if len(res) < len(original_string) else original_string
